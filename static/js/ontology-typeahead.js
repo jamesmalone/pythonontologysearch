@@ -15,13 +15,14 @@ $(document).ready( function() {
         },
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: 'http://localhost:8983/solr/note/select?wt=json&q=%QUERY',
+            url: 'http://localhost:8983/solr/ontology_index/select?wt=json&q=%QUERY',
             wildcard: '%QUERY',
             filter: function (data) {
                 return $.map(data.response.docs, function (suggestionSet) {
                     return{
-                        title_auto : suggestionSet.title_auto,
-                        category : suggestionSet.category
+                        label : suggestionSet.label,
+                        ontology_name : suggestionSet.ontology_name,
+                        short_form : suggestionSet.short_form
                     }
                 });
             }
@@ -38,7 +39,7 @@ $(document).ready( function() {
         },
         {
             name: 'engine',
-            display: 'title_auto',
+            display: 'label',
 
             source: engine.ttAdapter(),
             //source: engine
@@ -50,7 +51,7 @@ $(document).ready( function() {
                     ' -No results-',
                     '</div>'
                 ].join('\n'),
-                suggestion: Handlebars.compile('<p class="Typeahead-input tt-input">{{title_auto}}' +  '  #{{category}}</p>')
+                suggestion: Handlebars.compile('<p class="Typeahead-input tt-input">{{label}}' +  '  {{short_form}}   #{{ontology_name}}</p>')
             },
             engine: Handlebars
         });

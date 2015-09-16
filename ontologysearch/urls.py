@@ -22,6 +22,6 @@ from django.contrib import admin
 urlpatterns = patterns('',
                        url(r'^$', views.index, name='index'),
                        url(r'^typeahead/$', views.typeahead, name='typeahead'),
-                           url(r'^search/', views.ontology_search, name='ontology_search'),
+                           url(r'^typeahead/', views.ontology_search, name='ontology_search'),
 
                        )
