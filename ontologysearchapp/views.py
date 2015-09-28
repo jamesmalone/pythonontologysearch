@@ -4,7 +4,7 @@ from django.template import RequestContext
 
 
 def index(request):
-    return HttpResponse("Rango says hey there world!")
+    return HttpResponse("replace me with index text")
 
 
 
